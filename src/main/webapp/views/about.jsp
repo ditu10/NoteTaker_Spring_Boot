@@ -9,5 +9,6 @@
 </head>
 <body>
     <h1>This is the About page!!</h1>
+    <h1>Counter : ${counter}</h1>
 </body>
 </html>
