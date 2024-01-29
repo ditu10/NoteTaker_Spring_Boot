@@ -4,9 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 public class MainController {
-    static int counter = 1;
+    int counter = 1;
 
     @RequestMapping("/")
     public String root(){
@@ -22,7 +25,18 @@ public class MainController {
 
     @RequestMapping("/about")
     public String about(Model model){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        String date = localDateTime.format(dateFormatter);
+        String time = localDateTime.format(timeFormatter);
+
         model.addAttribute("counter", counter++);
+        model.addAttribute("dateTime", localDateTime);
+        model.addAttribute("date", date);
+        model.addAttribute("time", time);
+
         System.out.println("this is home page");
         return "about";
     }
